@@ -24,17 +24,17 @@ from common.citylearn.citylearn import CityLearnEnv
 from common.tuned_pi import TunedPIController
 
 
-class Controller(TunedPIController):
+class Controller(TunedPIController): # this controller currently inherits all behavior from the existing TunedPIController
     """One instance controls the whole portfolio when the environment is created with
     `central_agent=True` (also works with `central_agent=False`)."""
 
-    def __init__(self, env: CityLearnEnv, **kwargs: Any):
-        super().__init__(env, **kwargs)
+    def __init__(self, env: CityLearnEnv, **kwargs: Any): # the environment is passed into the controller
+        super().__init__(env, **kwargs) # calls the constructor of TunedPIController
 
-    def battery_action(self, i: int, building) -> float:
+    def battery_action(self, i: int, building) -> float: # currently, battery action is always zero, batteries neither charge nor discharge, the existing controller only relies on the tuned PI thermostat
         """Battery action for building `i` in [-1, 1] (charge > 0). Idle for now."""
         return 0.0
 
-    def thermal_action(self, i: int, building, action_name: str) -> float:
+    def thermal_action(self, i: int, building, action_name: str) -> float: # the existing tuned PI thermostat from the parent class is used; PI controls the thermal systems, batteries remain idle, no MPC logic active yet
         """Heat pump action for building `i` in [0, 1]. Currently the tuned PI unchanged."""
         return super().thermal_action(i, building, action_name)
