@@ -19,8 +19,8 @@ import torch  # noqa: F401
 
 # Make the local CityLearn copy and the shared evaluation in common/ importable
 # (do NOT pip install citylearn).
-HERE = Path(__file__).resolve().parent
-REPO_ROOT = HERE.parents[1]
+HERE = Path(__file__).resolve().parent # HERE points to your participant folder
+REPO_ROOT = HERE.parents[1] # REPO_ROOT points to the repository root
 sys.path.insert(0, str(REPO_ROOT / 'common'))   # keep: lets the local citylearn package be imported
 sys.path.insert(0, str(REPO_ROOT))              # add: makes `common.evaluation` importable
 sys.path.insert(0, str(HERE))
@@ -49,8 +49,8 @@ def main():
         actions = agent.predict(observations)
         observations, _, _, _, _ = env.step(actions)
 
-    result = collect(env, args.climate, args.period)
-    baseline = None if args.no_baseline else load_baseline(args.climate, args.period)
+    result = collect(env, args.climate, args.period) # extracts your simulation results
+    baseline = None if args.no_baseline else load_baseline(args.climate, args.period) # loads the stored tuned PI baseline
     report = evaluate(result, baseline)
 
     out_dir = HERE / 'results' / f'{args.climate.lower()}_{args.period}'

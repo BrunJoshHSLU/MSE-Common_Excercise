@@ -1,0 +1,28 @@
+,value
+climate,VT
+period,train
+season,heating
+time_steps,744
+buildings,25
+nmbe_pct,38.98312350654919
+cvrmse_pct,58.15824587979097
+comfort_band_c,20-24
+discomfort_mean_Kh,225.94566
+discomfort_median_Kh,225.82205
+exceedance_hours_total,5171.0
+exceedance_pct_portfolio,27.801075268817204
+energy_kwh,102948.516
+peak_kw,328.31992
+peak_time,2018-01-07 07:00:00
+daily_nmbe_median_pct,45.09317985173479
+daily_cvrmse_median_pct,60.25864029837048
+peak_to_valley_median,2.8181696
+load_factor_mean,0.7299775
+ramping_mean_kw,340.19867
+baseline_energy_kwh,102948.5203441788
+energy_change_pct,-4.584018097317676e-06
+baseline_peak_kw,328.3198746
+baseline_peak_time,2018-01-07 07:00:00
+baseline_peak_to_valley_median,2.8181697796248475
+baseline_load_factor_mean,0.7299774104456876
+baseline_ramping_mean_kw,340.19867316116137
