@@ -1,0 +1,35 @@
+# Final central MPC, VT (heating). Chosen on the TRAINING month by a fixed rule: lowest CV-RMSE with
+# median discomfort <= 15 K h. Test month: NMBE 33.3 %, CV-RMSE 43.9 %, median 15.1 K h.
+climate: VT
+controller:
+  identification: phase3_cl     # thermal models: models/thermal_vt_phase3_cl.json
+  horizon: 24
+  # objective weights
+  w_track: 100.0
+  w_comfort: 1.0
+  w_comfort_sq: 1.0
+  w_fair: 10.0
+  w_du: 0.1
+  w_bat: 0.001
+  w_term: 1.0
+  soc_target: 0.5
+  # export slack price: sigma_factor * tracking gain + w_export, per hour
+  sigma_factor: 2.0
+  w_export: 0.05
+  w_sigma_sq: 0.0
+  # bias filter
+  bias_gain: 0.3
+  bias_leak: 0.98
+  bias_decay: 0.8
+  bias_clip_rmse: 3.0
+  # battery
+  bat_eff_power_frac: 0.8
+  # comfort margin: quantile of the model error, clipped [K]
+  margin_key: bc_q80
+  margin_min: 0.2
+  margin_max: 0.75
+  # forecasts
+  day_ahead_hour: 12
+  load_days: 7
+  load_ar_phi: 0.24748471951620896
+  dhw_ar_phi: 0.051311255811839394

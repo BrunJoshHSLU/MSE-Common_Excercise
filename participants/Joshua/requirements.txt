@@ -1,0 +1,6 @@
+# Extra dependencies for participants/Joshua (on top of the repo's requirements.txt)
+cvxpy>=1.4      # MPC (QP with DPP parameters); ships with OSQP, Clarabel, SCS
+scipy           # constrained least squares for system identification (Phase 2/3)
+pyyaml          # per-climate controller configs (Phase 2+)
+pytest          # participants/Joshua/tests
+matplotlib      # Phase 3+ model plots

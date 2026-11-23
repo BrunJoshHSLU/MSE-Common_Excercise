@@ -39,10 +39,19 @@ def main():
     parser.add_argument('--period', choices=['train', 'test'], default='train')
     parser.add_argument('--no-baseline', action='store_true',
                         help='skip the comparison with the baseline (tuned PI, common/tuned_pi.py)')
+    parser.add_argument('--controller', choices=['pi', 'mpc'], default='pi',
+                        help='pi = ControllerTest (controller.py), mpc = CentralMPCController (mpc_controller.py)')
+    parser.add_argument('--config', default=None,
+                        help='mpc only: YAML in participants/Joshua/configs/; default = final_<climate>.yaml')
     args = parser.parse_args()
 
     env = make_env(args.climate, args.period, central_agent=True)
-    agent = ControllerTest(env)
+    if args.controller == 'mpc':
+        from mpc_controller import CentralMPCController  # needs cvxpy
+        args.config = args.config or f'final_{args.climate.lower()}.yaml'
+        agent = CentralMPCController.from_config(env, args.climate, args.config)
+    else:
+        agent = ControllerTest(env)
 
     observations, _ = env.reset()
     while not env.terminated:
@@ -54,7 +63,10 @@ def main():
     baseline = None if args.no_baseline else load_baseline(args.climate, args.period)
     report = evaluate(result, baseline)
 
-    out_dir = HERE / 'results' / f'{args.climate.lower()}_{args.period}'
+    suffix = '' if args.controller == 'pi' else f'_{args.controller}'
+    if args.controller == 'mpc' and args.config:
+        suffix += f'_{Path(args.config).stem}'
+    out_dir = HERE / 'results' / f'{args.climate.lower()}_{args.period}{suffix}'
     result.to_csv(out_dir / 'timeseries.csv')
     report['daily'].to_csv(out_dir / 'daily.csv', index=False)
     report['buildings'].to_csv(out_dir / 'buildings.csv')

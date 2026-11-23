@@ -1,0 +1,28 @@
+,value
+climate,TX
+period,test
+season,cooling
+time_steps,744
+buildings,25
+nmbe_pct,3.872852110109659
+cvrmse_pct,16.7715872117399
+comfort_band_c,22-26
+discomfort_mean_Kh,4.529556
+discomfort_median_Kh,1.950861
+exceedance_hours_total,161.0
+exceedance_pct_portfolio,0.8655913978494624
+energy_kwh,20149.543
+peak_kw,48.920635
+peak_time,2018-07-24 22:00:00
+daily_nmbe_median_pct,4.0895692723115555
+daily_cvrmse_median_pct,15.858451557150739
+peak_to_valley_median,1.9241091
+load_factor_mean,0.71650213
+ramping_mean_kw,102.07326
+baseline_energy_kwh,23092.65140876201
+energy_change_pct,-12.744783558700885
+baseline_peak_kw,84.3413556
+baseline_peak_time,2018-07-23 19:00:00
+baseline_peak_to_valley_median,150.8032077365809
+baseline_load_factor_mean,0.46603161478477656
+baseline_ramping_mean_kw,158.39557690285162
