@@ -42,7 +42,7 @@ def main():
     args = parser.parse_args()
 
     env = make_env(args.climate, args.period, central_agent=True)
-    agent = Controller(env)
+    agent = Controller(env, climate=args.climate, period=args.period, horizon=24)
 
     observations, _ = env.reset()
     while not env.terminated:
